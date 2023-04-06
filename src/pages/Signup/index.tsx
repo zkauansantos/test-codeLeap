@@ -1,3 +1,4 @@
+import Button from '../../components/Button';
 import { ContainerModal, ContainerInputName, Submit } from './styles';
 
 export default function SignupModal() {
@@ -14,7 +15,7 @@ export default function SignupModal() {
       </ContainerInputName>
 
       <Submit>
-        <button type="button">Enter</button>
+        <Button label="Enter" />
       </Submit>
     </ContainerModal>
   );

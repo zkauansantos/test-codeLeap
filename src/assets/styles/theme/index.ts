@@ -11,7 +11,8 @@ export const theme : DefaultTheme = {
   },
   fontsSizes: {
     sm: '1.4rem',
-    md: '1.8rem',
-    lg: '2.2rem',
+    md: '1.6rem',
+    lg: '1.8rem',
+    xl: '2.2rem',
   },
 };
