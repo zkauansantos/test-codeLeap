@@ -12,5 +12,9 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     background: ${({ theme }) => theme.colors.bg};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
 `;
