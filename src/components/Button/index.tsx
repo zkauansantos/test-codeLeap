@@ -7,15 +7,14 @@ interface ButtonProps {
   background: string
 }
 
-export default function Button({
-  label, onAction, disabled, background,
-}: ButtonProps) {
+export default function Button({ label, onAction, disabled, background }: ButtonProps) {
   return (
     <ButtonStyled
       bg={background}
       disabled={disabled}
       onClick={onAction}
-    >{label}
+    >
+      {label}
     </ButtonStyled>
   );
 }

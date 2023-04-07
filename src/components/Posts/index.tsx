@@ -1,48 +1,45 @@
-/* eslint-disable react/jsx-no-bind */
-
 import { useEffect } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BiEdit } from 'react-icons/bi';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { Ipost } from '../../types/interfaces/Post';
 
 import Header from '../Header';
 import UserActions from '../UserActions';
-
 import usePost from '../../hooks/usePost';
 import getMinutesSincePostCreation from '../../utils/getMinutesSincePostCreation';
+import Modal from '../Modal';
 
 import { Container, Post, Content } from './styles';
-import Modal from '../Modal';
-import { openModal } from '../../redux/slices/modalSlice';
 import { RootState } from '../../types/interfaces/RootState';
+import { openModal } from '../../redux/slices/modalSlice';
 import { updatePosts } from '../../redux/slices/postsSlice';
 import sortPosts from '../../utils/sortPosts';
 
 export default function Posts() {
   const { data } = usePost();
-  const { name } = useSelector(({ user }: RootState) => user);
-  const { arrPosts } = useSelector(({ posts }: any) => posts);
   const dispatch = useDispatch();
-
-  function handleOpenModalEdit(postId: number) {
-    dispatch(openModal({ edit: true, del: false, postId }));
-  }
-
-  function handleOpenModalDelete(postId: number) {
-    dispatch(openModal({ edit: false, del: true, postId }));
-  }
+  const { name } = useSelector((state: RootState) => state.user);
+  const { arrPosts } = useSelector((state: RootState) => state.posts);
 
   useEffect(() => {
-    dispatch(updatePosts(data?.results));
+    if (data?.results) {
+      dispatch(updatePosts(data?.results));
+    }
   }, [data]);
 
   const sortedPosts = sortPosts(arrPosts);
 
+  const handleOpenModalEdit = (postId: number) => {
+    dispatch(openModal({ edit: true, del: false, postId }));
+  };
+
+  const handleOpenModalDelete = (postId: number) => {
+    dispatch(openModal({ edit: false, del: true, postId }));
+  };
+
   return (
     <Container>
-      {sortedPosts?.map((post: Ipost) => (
+      {sortedPosts?.map((post) => (
         <Post key={post.id}>
           <Header title={post.title} height="0.7rem">
             {post.username === name && (
@@ -58,13 +55,12 @@ export default function Posts() {
               <span>@{post.username}</span>
               <span>{getMinutesSincePostCreation(post.created_datetime)}</span>
             </div>
-
             <p>{post.content}</p>
           </Content>
+
           <Modal />
         </Post>
       ))}
-
     </Container>
   );
 }

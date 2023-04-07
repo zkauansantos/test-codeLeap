@@ -1,10 +1,13 @@
-import { BiLogOut } from 'react-icons/bi';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ContainerHeader } from './styles';
-import UserActions from '../UserActions';
+import { BiLogOut } from 'react-icons/bi';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/slices/userSlice';
 import { RootState } from '../../types/interfaces/RootState';
+
+import UserActions from '../UserActions';
+
+import { ContainerHeader } from './styles';
 
 interface HeaderProps {
   title: string,

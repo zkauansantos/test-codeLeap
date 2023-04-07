@@ -1,10 +1,13 @@
 /* eslint-disable react/jsx-no-bind */
 import { useSelector } from 'react-redux';
-import FormGroup from '../FormGroup';
-import { ContainerForm } from './styles';
-import usePostMutate from '../../hooks/usePostMutate';
-import { RootState } from '../../types/interfaces/RootState';
+
 import { SubmitParameters } from '../../types/submit';
+import { RootState } from '../../types/interfaces/RootState';
+
+import FormGroup from '../FormGroup';
+import usePostMutate from '../../hooks/usePostMutate';
+
+import { ContainerForm } from './styles';
 
 export default function FormNewPost() {
   const { name } = useSelector(({ user }: RootState) => user);
