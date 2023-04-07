@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import { ContainerModal, ContainerInputName, Submit } from './styles';
@@ -10,10 +10,10 @@ export default function SignupModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleLogin() {
+  const handleLogin = useCallback(() => {
     dispatch(changeUser(username));
     navigate('/home');
-  }
+  }, [username]);
 
   return (
     <ContainerModal>
@@ -31,7 +31,7 @@ export default function SignupModal() {
         <Button
           disabled={!username}
           label="Enter"
-          onAction={() => handleLogin()}
+          onAction={handleLogin}
         />
       </Submit>
     </ContainerModal>

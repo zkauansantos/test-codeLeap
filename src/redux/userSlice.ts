@@ -8,16 +8,16 @@ export const slice = createSlice({
   },
   reducers: {
     changeUser(state, { payload }) {
+      localStorage.setItem('user', JSON.stringify({ ...state, isLogged: true, name: payload }));
       return { ...state, isLogged: true, name: payload };
     },
     logout(state) {
-      return { ...state, isLogged: false };
+      localStorage.removeItem('user');
+      return { ...state, isLogged: false, name: '' };
     },
   },
 });
 
 export const { changeUser, logout } = slice.actions;
-
-export const user = (state: any) => state.name;
 
 export default slice.reducer;

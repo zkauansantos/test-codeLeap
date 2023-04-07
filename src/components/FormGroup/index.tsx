@@ -6,11 +6,6 @@ interface FormGroupProps {
   onSubmit?: () => void
 }
 
-const defaultProps: FormGroupProps = {
-  edit: false,
-  onSubmit: () => {},
-};
-
 export default function FormGroup({ edit, onSubmit }: FormGroupProps) {
   return (
     <Form onSubmit={onSubmit}>
@@ -25,11 +20,14 @@ export default function FormGroup({ edit, onSubmit }: FormGroupProps) {
       </label>
 
       <div className="buttons">
-        {edit && <Button label="Create" />}
-        <Button label="Create" />
+        {edit && <Button label="Create" disabled />}
+        <Button label="Create" disabled />
       </div>
     </Form>
   );
 }
 
-FormGroup.defaultProps = defaultProps;
+FormGroup.defaultProps = {
+  edit: false,
+  onSubmit: () => {},
+};
