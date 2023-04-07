@@ -1,4 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
+
+import { useEffect } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BiEdit } from 'react-icons/bi';
 
@@ -13,34 +15,37 @@ import getMinutesSincePostCreation from '../../utils/getMinutesSincePostCreation
 
 import { Container, Post, Content } from './styles';
 import Modal from '../Modal';
-import sortPosts from '../../utils/sortPosts';
-import { openModal } from '../../redux/modalSlice';
+import { openModal } from '../../redux/slices/modalSlice';
 import { RootState } from '../../types/interfaces/RootState';
+import { updatePosts } from '../../redux/slices/postsSlice';
 
 export default function Posts() {
   const { data } = usePost();
   const { name } = useSelector(({ user }: RootState) => user);
+  const { arrPosts } = useSelector(({ posts }: any) => posts);
   const dispatch = useDispatch();
 
-  const sortedPosts = sortPosts(data?.results);
-
-  function handleOpenModalEdit() {
-    dispatch(openModal({ edit: true, del: false }));
+  function handleOpenModalEdit(postId: number) {
+    dispatch(openModal({ edit: true, del: false, postId }));
   }
 
-  function handleOpenModalDelete() {
-    dispatch(openModal({ edit: false, del: true }));
+  function handleOpenModalDelete(postId: number) {
+    dispatch(openModal({ edit: false, del: true, postId }));
   }
+
+  useEffect(() => {
+    dispatch(updatePosts(data?.results));
+  }, [data]);
 
   return (
     <Container>
-      {sortedPosts?.map((post: Ipost) => (
+      {arrPosts?.map((post: Ipost) => (
         <Post key={post.id}>
           <Header title={post.title} height="0.7rem">
             {post.username === name && (
               <UserActions>
-                <BsFillTrashFill onClick={handleOpenModalDelete} />
-                <BiEdit onClick={handleOpenModalEdit} />
+                <BsFillTrashFill onClick={() => handleOpenModalDelete(post.id)} />
+                <BiEdit onClick={() => handleOpenModalEdit(post.id)} />
               </UserActions>
             )}
           </Header>
@@ -53,10 +58,10 @@ export default function Posts() {
 
             <p>{post.content}</p>
           </Content>
+          <Modal />
         </Post>
       ))}
 
-      <Modal />
     </Container>
   );
 }
