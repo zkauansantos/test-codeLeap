@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const ButtonStyled = styled.button`
-  background: ${({ theme }) => theme.colors.lightBlue};
+export const ButtonStyled = styled.button<{ bg: string }>`
+  background: ${({ bg }) => bg};
   color: ${({ theme }) => theme.colors.light};
   width: 11.1rem;
   height: 3.2rem;

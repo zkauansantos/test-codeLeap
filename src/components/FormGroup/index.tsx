@@ -1,18 +1,21 @@
 /* eslint-disable react/jsx-no-bind */
 import { useState, FormEvent } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import usePostMutate from '../../hooks/usePostMutate';
 
 import Button from '../Button';
 
-import { Form } from './styles';
+import { ContainerButtons, Form } from './styles';
 import { RootState } from '../../types/interfaces/RootState';
+import { closeModal } from '../../redux/modalSlice';
 
 interface FormGroupProps {
   cancel?: boolean
+  edit: boolean
 }
 
-export default function FormGroup({ cancel }: FormGroupProps) {
+export default function FormGroup({ cancel, edit }: FormGroupProps) {
+  const dispatch = useDispatch();
   const { name } = useSelector(({ user }: RootState) => user);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -29,6 +32,8 @@ export default function FormGroup({ cancel }: FormGroupProps) {
 
     mutate(body);
   }
+
+  console.log({ title, content });
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -53,19 +58,21 @@ export default function FormGroup({ cancel }: FormGroupProps) {
         />
       </label>
 
-      <div className="buttons">
+      <ContainerButtons edit={edit}>
         {cancel && (
           <Button
+            background="#FFF"
+            onAction={() => dispatch(closeModal())}
             label="Cancelar"
-            disabled={false}
           />
         )}
 
         <Button
-          label="Create"
+          background={edit ? '#31992e' : '#7695EC'}
+          label={edit ? 'Save' : 'Create'}
           disabled={!title || !content}
         />
-      </div>
+      </ContainerButtons>
     </Form>
   );
 }

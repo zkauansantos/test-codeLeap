@@ -29,6 +29,7 @@ export default function SignupModal() {
 
       <Submit>
         <Button
+          background="#7695EC"
           disabled={!username}
           label="Enter"
           onAction={handleLogin}

@@ -8,7 +8,7 @@ export default function FormNewPost() {
         <h1> What{'\'s'} on your mind?</h1>
       </header>
 
-      <FormGroup />
+      <FormGroup edit={false} />
     </ContainerForm>
   );
 }

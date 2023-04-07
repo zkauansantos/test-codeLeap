@@ -19,3 +19,31 @@ export const ContentModal = styled.div`
   padding: 24px;
   border-radius: 8px;
 `;
+
+export const ContainerDelete = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: ${({ theme }) => theme.fontsSizes.xl};
+  }
+
+  div {
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+      border: 1px solid ${({ theme }) => theme.colors.gray};
+      color: ${({ theme }) => theme.colors.text};
+      font-weight: bold;
+    }
+
+    button:nth-child(2){
+      color: ${({ theme }) => theme.colors.light};
+    }
+  }
+`;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Form = styled.form`
   label {
@@ -27,13 +27,19 @@ export const Form = styled.form`
       max-width: 100%;
     }
   }
+`;
 
-  .buttons {
+export const ContainerButtons = styled.div<{ edit: boolean }>`
+    ${({ edit, theme }) => edit && css`
+      button:first-child {
+        border: 1px solid ${theme.colors.gray};
+        color: ${theme.colors.text};
+      }
+    `}
     width: 100%;
     margin-top: 24px ;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 16px;
-  }
 `;
