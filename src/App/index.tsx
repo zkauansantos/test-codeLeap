@@ -7,7 +7,7 @@ import { theme } from '../assets/styles/theme';
 import { client } from '../lib/queryClient';
 import { Container } from './styles';
 
-import store from '../redux/store';
+import store from '../redux/store/store';
 
 import Routes from '../routes';
 

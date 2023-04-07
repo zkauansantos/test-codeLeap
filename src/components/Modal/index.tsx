@@ -20,7 +20,7 @@ export default function Modal() {
     return null;
   }
 
-  function handleDeleteContact() {
+  function handleDeletePost() {
     const newListPosts = arrPosts?.filter(
       (post) => (post.id !== postId),
     );
@@ -40,7 +40,7 @@ export default function Modal() {
 
               <div>
                 <Button label="Cancel" onAction={() => dispatch(closeModal({ postId: undefined }))} background="#FFF" />
-                <Button label="Delete" background="#FF5151" onAction={handleDeleteContact} />
+                <Button label="Delete" background="#FF5151" onAction={handleDeletePost} />
               </div>
             </ContainerDelete>
           )}

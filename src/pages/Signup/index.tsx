@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import { ContainerModal, ContainerInputName, Submit } from './styles';
-import { changeUser } from '../../redux/userSlice';
+import { changeUser } from '../../redux/slices/userSlice';
 
 export default function SignupModal() {
   const [username, setUserName] = useState('');

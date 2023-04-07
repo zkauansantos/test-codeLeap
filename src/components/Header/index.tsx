@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ContainerHeader } from './styles';
 import UserActions from '../UserActions';
-import { logout } from '../../redux/userSlice';
+import { logout } from '../../redux/slices/userSlice';
 import { RootState } from '../../types/interfaces/RootState';
 
 interface HeaderProps {

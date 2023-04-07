@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import Button from '../Button';
 
 import { ContainerButtons, Form } from './styles';
-import { closeModal } from '../../redux/modalSlice';
+import { closeModal } from '../../redux/slices/modalSlice';
 import { SubmitParameters } from '../../types/submit';
 
 interface FormGroupProps {
@@ -51,7 +51,7 @@ export default function FormGroup({ cancel, edit, onSubmit }: FormGroupProps) {
         {cancel && (
           <Button
             background="#FFF"
-            onAction={() => dispatch(closeModal())}
+            onAction={() => dispatch(closeModal({}))}
             label="Cancelar"
           />
         )}
