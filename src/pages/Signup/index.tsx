@@ -1,7 +1,20 @@
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import { ContainerModal, ContainerInputName, Submit } from './styles';
+import { changeUser } from '../../redux/userSlice';
 
 export default function SignupModal() {
+  const [username, setUserName] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function handleLogin() {
+    dispatch(changeUser(username));
+    navigate('/home');
+  }
+
   return (
     <ContainerModal>
       <header>
@@ -10,12 +23,16 @@ export default function SignupModal() {
 
       <ContainerInputName>
         <label htmlFor="name">Please enter your username
-          <input type="text" id="name" />
+          <input type="text" id="name" onChange={(e) => setUserName(e.target.value)} value={username} />
         </label>
       </ContainerInputName>
 
       <Submit>
-        <Button label="Enter" />
+        <Button
+          disabled={!username}
+          label="Enter"
+          onAction={() => handleLogin()}
+        />
       </Submit>
     </ContainerModal>
   );
