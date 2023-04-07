@@ -40,6 +40,7 @@ export const Content = styled.div`
   }
 
     p {
+      word-wrap: break-word;
       margin-top: 16px;
       width: 100%;
       text-align: flex-start;

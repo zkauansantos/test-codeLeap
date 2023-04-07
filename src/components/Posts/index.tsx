@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
-import { useState } from 'react';
-
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BiEdit } from 'react-icons/bi';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { Ipost } from '../../types/interfaces/Post';
 
 import Header from '../Header';
@@ -15,23 +14,22 @@ import getMinutesSincePostCreation from '../../utils/getMinutesSincePostCreation
 import { Container, Post, Content } from './styles';
 import Modal from '../Modal';
 import sortPosts from '../../utils/sortPosts';
+import { openModal } from '../../redux/modalSlice';
+import { RootState } from '../../types/interfaces/RootState';
 
 export default function Posts() {
   const { data } = usePost();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editModal, setEditModal] = useState(false);
-  const [delModal, setDelModal] = useState(false);
+  const { name } = useSelector(({ user }: RootState) => user);
+  const dispatch = useDispatch();
 
   const sortedPosts = sortPosts(data?.results);
 
   function handleOpenModalEdit() {
-    setEditModal(true);
-    setIsModalVisible(true);
+    dispatch(openModal({ edit: true, del: false }));
   }
 
   function handleOpenModalDelete() {
-    setDelModal(true);
-    setIsModalVisible(true);
+    dispatch(openModal({ edit: false, del: true }));
   }
 
   return (
@@ -39,10 +37,12 @@ export default function Posts() {
       {sortedPosts?.map((post: Ipost) => (
         <Post key={post.id}>
           <Header title={post.title} height="0.7rem">
-            <UserActions>
-              <BsFillTrashFill onClick={handleOpenModalEdit} />
-              <BiEdit onClick={handleOpenModalDelete} />
-            </UserActions>
+            {post.username === name && (
+              <UserActions>
+                <BsFillTrashFill onClick={handleOpenModalDelete} />
+                <BiEdit onClick={handleOpenModalEdit} />
+              </UserActions>
+            )}
           </Header>
 
           <Content>
@@ -56,7 +56,7 @@ export default function Posts() {
         </Post>
       ))}
 
-      <Modal del={delModal} edit={editModal} visible={isModalVisible} />
+      <Modal />
     </Container>
   );
 }
