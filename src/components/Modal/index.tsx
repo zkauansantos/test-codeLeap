@@ -6,37 +6,47 @@ import FormGroup from '../FormGroup';
 
 import { ContainerDelete, ContentModal, Overlay } from './styles';
 import { RootState } from '../../types/interfaces/RootState';
-import { closeModal } from '../../redux/modalSlice';
+import { closeModal } from '../../redux/slices/modalSlice';
+import { updatePosts } from '../../redux/slices/postsSlice';
 
 export default function Modal() {
-  const { visible, edit, del } = useSelector(({ modal }: RootState) => modal);
   const dispatch = useDispatch();
+  const {
+    visible, edit, del, postId,
+  } = useSelector((state: RootState) => state.modal);
+  const { arrPosts } = useSelector((state: RootState) => state.posts);
 
   if (!visible) {
     return null;
   }
 
-  const element = document.getElementById('portal-root') as HTMLElement;
+  function handleDeleteContact() {
+    const newListPosts = arrPosts?.filter(
+      (post) => (post.id !== postId),
+    );
+    dispatch(updatePosts(newListPosts));
+    dispatch(closeModal({ postId: undefined }));
+  }
 
-  return ReactDOM.createPortal(
-    (
+  return (
+    ReactDOM.createPortal(
       <Overlay>
         <ContentModal>
           {edit && <FormGroup edit cancel onSubmit={() => {}} />}
 
           {del && (
-          <ContainerDelete>
-            <h1>Are you sure you want to delete this item ?</h1>
+            <ContainerDelete>
+              <h1>Are you sure you want to delete this item ?</h1>
 
-            <div>
-              <Button label="Cancel" onAction={() => dispatch(closeModal())} background="#FFF" />
-              <Button label="Delete" background="#FF5151" disabled={false} />
-            </div>
-          </ContainerDelete>
+              <div>
+                <Button label="Cancel" onAction={() => dispatch(closeModal({ postId: undefined }))} background="#FFF" />
+                <Button label="Delete" background="#FF5151" onAction={handleDeleteContact} />
+              </div>
+            </ContainerDelete>
           )}
-
         </ContentModal>
-      </Overlay>
-    ), element,
+      </Overlay>,
+      document.getElementById('portal-root') as HTMLElement,
+    )
   );
 }
