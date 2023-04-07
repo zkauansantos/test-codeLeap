@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BiEdit } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,13 +29,13 @@ export default function Posts() {
 
   const sortedPosts = sortPosts(arrPosts);
 
-  const handleOpenModalEdit = (postId: number) => {
+  const handleOpenModalEdit = useCallback((postId: number) => {
     dispatch(openModal({ edit: true, del: false, postId }));
-  };
+  }, []);
 
-  const handleOpenModalDelete = (postId: number) => {
+  const handleOpenModalDelete = useCallback((postId: number) => {
     dispatch(openModal({ edit: false, del: true, postId }));
-  };
+  }, []);
 
   return (
     <Container>

@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback } from 'react';
 import Button from '../Button';
 import FormGroup from '../FormGroup';
 import { ContainerDelete, ContentModal, Overlay } from './styles';
@@ -17,13 +16,13 @@ export default function Modal() {
     return null;
   }
 
-  const handleDeletePost = useCallback(() => {
+  function handleDeletePost() {
     const newListPosts = arrPosts?.filter((post) => post.id !== postId);
     dispatch(updatePosts(newListPosts));
     dispatch(closeModal({ postId: undefined }));
-  }, [arrPosts]);
+  }
 
-  const handleEditPost = useCallback(({ title, content }: { title: string, content: string }) => {
+  function handleEditPost({ title, content }: { title: string, content: string }) {
     const postToEdit = arrPosts.find((post) => post.id === postId);
     const postUpdated = { ...postToEdit, title, content };
 
@@ -36,7 +35,7 @@ export default function Modal() {
 
     dispatch(updatePosts(updatedPosts));
     dispatch(closeModal({}));
-  }, [postId]);
+  }
 
   return ReactDOM.createPortal(
     <Overlay>
