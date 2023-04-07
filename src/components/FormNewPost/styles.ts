@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContainerForm = styled.div`
-  width: calc(100vw - (100vw - 750px));
+  width: 100%;
   height: 33.4rem;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray};

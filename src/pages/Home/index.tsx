@@ -1,14 +1,18 @@
 import FormNewPost from '../../components/FormNewPost';
 import Header from '../../components/Header';
+import Posts from '../../components/Posts';
 
-import { Container } from './styles';
+import { ContainerHome, Container } from './styles';
 
 export default function Home() {
   return (
-    <Container>
+    <ContainerHome>
       <Header title="CodeLeap Network" height="8rem" />
 
-      <FormNewPost />
-    </Container>
+      <Container>
+        <FormNewPost />
+        <Posts />
+      </Container>
+    </ContainerHome>
   );
 }

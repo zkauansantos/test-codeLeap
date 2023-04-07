@@ -8,13 +8,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body, html {
+    background: ${({ theme }) => theme.colors.semiLight};
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    background: ${({ theme }) => theme.colors.bg};
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
   }
 `;
