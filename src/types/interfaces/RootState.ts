@@ -1,9 +1,6 @@
-import { Ipost } from './Post';
-
 export interface RootState {
   user: UserState
   modal: ModalState
-  posts: PostsState
 }
 
 export interface UserState {
@@ -16,8 +13,4 @@ export interface ModalState {
   edit: boolean,
   del: boolean,
   postId?: number | null | undefined
-}
-
-export interface PostsState extends Ipost {
-  arrPosts: Ipost[]
 }

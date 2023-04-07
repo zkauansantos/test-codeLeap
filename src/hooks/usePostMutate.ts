@@ -1,14 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Ipost } from '../types/interfaces/Post';
 
 export default function usePostMutate() {
-  async function createPost(post: Ipost) {
-    await fetch('https://dev.codeleap.co.uk/careers/', {
+  async function createPost({ body, method, postId }: any) {
+    const url = postId
+      ? `https://dev.codeleap.co.uk/careers/${postId}/`
+      : 'https://dev.codeleap.co.uk/careers/';
+
+    await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
       },
-      method: 'POST',
-      body: JSON.stringify(post),
+      method,
+      body: JSON.stringify(body),
     });
   }
 

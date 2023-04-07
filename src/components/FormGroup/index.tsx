@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import { useState, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 

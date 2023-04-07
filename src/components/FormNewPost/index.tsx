@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import { useSelector } from 'react-redux';
 
 import { SubmitParameters } from '../../types/submit';
@@ -21,7 +20,7 @@ export default function FormNewPost() {
       content,
     };
 
-    mutate(body);
+    mutate({ body, method: 'POST' });
   }
 
   return (

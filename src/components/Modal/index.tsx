@@ -5,35 +5,30 @@ import FormGroup from '../FormGroup';
 import { ContainerDelete, ContentModal, Overlay } from './styles';
 import { RootState } from '../../types/interfaces/RootState';
 import { closeModal } from '../../redux/slices/modalSlice';
-import { updatePosts } from '../../redux/slices/postsSlice';
+import usePostMutate from '../../hooks/usePostMutate';
 
 export default function Modal() {
   const dispatch = useDispatch();
   const { visible, edit, del, postId } = useSelector((state: RootState) => state.modal);
-  const { arrPosts } = useSelector((state: RootState) => state.posts);
+  const { mutate } = usePostMutate();
 
   if (!visible) {
     return null;
   }
 
   function handleDeletePost() {
-    const newListPosts = arrPosts?.filter((post) => post.id !== postId);
-    dispatch(updatePosts(newListPosts));
+    const postBeingDeleted = postId;
+    mutate({ postId: postBeingDeleted, method: 'DELETE' });
     dispatch(closeModal({ postId: undefined }));
   }
 
   function handleEditPost({ title, content }: { title: string, content: string }) {
-    const postToEdit = arrPosts.find((post) => post.id === postId);
-    const postUpdated = { ...postToEdit, title, content };
+    const body = {
+      title,
+      content,
+    };
 
-    const updatedPosts = arrPosts.map((post) => {
-      if (post.id === postId) {
-        return postUpdated;
-      }
-      return post;
-    });
-
-    dispatch(updatePosts(updatedPosts));
+    mutate({ body, method: 'PATCH', postId: `${postId}/` });
     dispatch(closeModal({}));
   }
 
