@@ -1,18 +1,21 @@
-import { useSelector, useDispatch } from 'react-redux';
 import { BiLogOut } from 'react-icons/bi';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ContainerHeader } from './styles';
-import { RootState } from '../../types/interfaces/RootState';
+import UserActions from '../UserActions';
 import { logout } from '../../redux/userSlice';
+import { RootState } from '../../types/interfaces/RootState';
 
 interface HeaderProps {
   title: string,
   height: string
   userActions?: boolean,
+  children?: React.ReactNode
 }
 
-export default function Header({ title, height, userActions }: HeaderProps) {
+export default function Header({
+  title, height, userActions, children,
+}: HeaderProps) {
   const { name } = useSelector(({ user }: RootState) => user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,16 +30,17 @@ export default function Header({ title, height, userActions }: HeaderProps) {
       <h1>{title}</h1>
 
       {userActions && (
-        <div className="user-actions">
+        <UserActions>
           <span>{name}</span>
           <BiLogOut onClick={() => handleLogout()} />
-        </div>
+        </UserActions>
       )}
-
+      {children}
     </ContainerHeader>
   );
 }
 
 Header.defaultProps = {
   userActions: false,
+  children: null,
 };

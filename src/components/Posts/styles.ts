@@ -15,6 +15,7 @@ export const Post = styled.div`
 `;
 
 export const Content = styled.div`
+  max-width: 100%;
   padding: 0px 24px 12px;
   display: flex;
   flex-direction: column;
@@ -38,13 +39,10 @@ export const Content = styled.div`
     }
   }
 
-  .paragraph{
-    margin-top: 16px;
-    width: 100%;
-    text-align: flex-start;
-
     p {
+      margin-top: 16px;
+      width: 100%;
+      text-align: flex-start;
       font-size: ${({ theme }) => theme.fontsSizes.md};
     }
-  }
 `;
