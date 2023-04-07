@@ -12,7 +12,6 @@ export default function Button({
 }: ButtonProps) {
   return (
     <ButtonStyled
-      className="btn"
       bg={background}
       disabled={disabled}
       onClick={onAction}

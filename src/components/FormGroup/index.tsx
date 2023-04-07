@@ -1,39 +1,28 @@
 /* eslint-disable react/jsx-no-bind */
 import { useState, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import usePostMutate from '../../hooks/usePostMutate';
+import { useDispatch } from 'react-redux';
 
 import Button from '../Button';
 
 import { ContainerButtons, Form } from './styles';
-import { RootState } from '../../types/interfaces/RootState';
 import { closeModal } from '../../redux/modalSlice';
+import { SubmitParameters } from '../../types/submit';
 
 interface FormGroupProps {
-  cancel?: boolean
-  edit: boolean
+  cancel?: boolean,
+  edit: boolean,
+  onSubmit: ({ title, content }: SubmitParameters) => void
 }
 
-export default function FormGroup({ cancel, edit }: FormGroupProps) {
+export default function FormGroup({ cancel, edit, onSubmit }: FormGroupProps) {
   const dispatch = useDispatch();
-  const { name } = useSelector(({ user }: RootState) => user);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const { mutate } = usePostMutate();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const body = {
-      username: name,
-      created_datetime: new Date().toISOString(),
-      title,
-      content,
-    };
-
-    mutate(body);
+    onSubmit({ title, content });
   }
-
-  console.log({ title, content });
 
   return (
     <Form onSubmit={handleSubmit}>

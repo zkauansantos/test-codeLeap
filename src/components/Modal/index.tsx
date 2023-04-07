@@ -22,7 +22,7 @@ export default function Modal() {
     (
       <Overlay>
         <ContentModal>
-          {edit && <FormGroup edit cancel />}
+          {edit && <FormGroup edit cancel onSubmit={() => {}} />}
 
           {del && (
           <ContainerDelete>
