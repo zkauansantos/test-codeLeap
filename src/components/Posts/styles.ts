@@ -8,14 +8,14 @@ export const Container = styled.div`
 
 export const Post = styled.div`
   width: 100%;
-  height: 33.4rem;
+  min-height: 33.4rem;
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray};
   margin-top: 24px;
 `;
 
 export const Content = styled.div`
-  padding: 0px 24px;
+  padding: 0px 24px 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;

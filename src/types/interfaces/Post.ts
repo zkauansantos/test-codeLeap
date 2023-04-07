@@ -6,7 +6,7 @@ export interface Iposts {
 }
 
 export interface Ipost {
-  id: string,
+  id?: string,
   username: string,
   created_datetime: string,
   title: string,

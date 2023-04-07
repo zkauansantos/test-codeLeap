@@ -6,9 +6,15 @@ interface ButtonProps {
   disabled: boolean
 }
 
-export default function Button({ label, onAction, disabled }: ButtonProps) {
+export default function Button({
+  label, onAction, disabled,
+}: ButtonProps) {
   return (
-    <ButtonStyled type="button" disabled={disabled} onClick={onAction}>{label}</ButtonStyled>
+    <ButtonStyled
+      disabled={disabled}
+      onClick={onAction}
+    >{label}
+    </ButtonStyled>
   );
 }
 
