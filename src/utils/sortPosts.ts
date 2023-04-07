@@ -5,7 +5,7 @@ export default function sortPosts(posts: Ipost[] | undefined): Ipost[] | null {
     return null;
   }
 
-  return posts.sort((a, b) => {
+  return [...posts].sort((a, b) => {
     const dateA = new Date(a.created_datetime).getTime();
     const dateB = new Date(b.created_datetime).getTime();
     return dateB - dateA;

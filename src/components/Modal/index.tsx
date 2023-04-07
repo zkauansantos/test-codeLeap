@@ -28,11 +28,25 @@ export default function Modal() {
     dispatch(closeModal({ postId: undefined }));
   }
 
+  function handleEditPost({ title, content }: any) {
+    const postToEdit = arrPosts.find((post) => post.id === postId);
+    const postUpdated = { ...postToEdit, title, content };
+
+    const updatedPosts = arrPosts.map((post) => {
+      if (post.id === postId) {
+        return postUpdated;
+      }
+      return post;
+    });
+
+    dispatch(updatePosts(updatedPosts));
+    dispatch(closeModal({}));
+  }
   return (
     ReactDOM.createPortal(
       <Overlay>
         <ContentModal>
-          {edit && <FormGroup edit cancel onSubmit={() => {}} />}
+          {edit && <FormGroup edit cancel onSubmit={handleEditPost} />}
 
           {del && (
             <ContainerDelete>

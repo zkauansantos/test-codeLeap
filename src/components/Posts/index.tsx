@@ -18,6 +18,7 @@ import Modal from '../Modal';
 import { openModal } from '../../redux/slices/modalSlice';
 import { RootState } from '../../types/interfaces/RootState';
 import { updatePosts } from '../../redux/slices/postsSlice';
+import sortPosts from '../../utils/sortPosts';
 
 export default function Posts() {
   const { data } = usePost();
@@ -37,15 +38,17 @@ export default function Posts() {
     dispatch(updatePosts(data?.results));
   }, [data]);
 
+  const sortedPosts = sortPosts(arrPosts);
+
   return (
     <Container>
-      {arrPosts?.map((post: Ipost) => (
+      {sortedPosts?.map((post: Ipost) => (
         <Post key={post.id}>
           <Header title={post.title} height="0.7rem">
             {post.username === name && (
               <UserActions>
-                <BsFillTrashFill onClick={() => handleOpenModalDelete(post.id)} />
-                <BiEdit onClick={() => handleOpenModalEdit(post.id)} />
+                <BsFillTrashFill onClick={() => handleOpenModalDelete(post.id!)} />
+                <BiEdit onClick={() => handleOpenModalEdit(post.id!)} />
               </UserActions>
             )}
           </Header>
