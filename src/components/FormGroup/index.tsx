@@ -21,6 +21,8 @@ export default function FormGroup({ cancel, edit, onSubmit }: FormGroupProps) {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     onSubmit({ title, content });
+    setTitle('');
+    setContent('');
   }
 
   return (

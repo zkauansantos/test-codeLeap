@@ -36,12 +36,6 @@ export default function Posts() {
     }
   }
 
-  useEffect(() => {
-    document.addEventListener('scroll', handleScroll);
-
-    return () => document.removeEventListener('scroll', handleScroll);
-  }, []);
-
   function next() {
     if (isBottom) {
       if (!isFetching && !isLoading) {
@@ -49,6 +43,12 @@ export default function Posts() {
       }
     }
   }
+
+  useEffect(() => {
+    document.addEventListener('scroll', handleScroll);
+
+    return () => document.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     next();
