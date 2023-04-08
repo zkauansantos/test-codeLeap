@@ -6,17 +6,14 @@ import { ContainerDelete, ContentModal, Overlay } from './styles';
 import { RootState } from '../../types/interfaces/RootState';
 import { closeModal } from '../../redux/slices/modalSlice';
 import usePostMutate from '../../hooks/usePostMutate';
-import useLocalStorage from '../../hooks/useLocalStorage';
 
 export default function Modal() {
   const dispatch = useDispatch();
-  const modalStorage: any = useLocalStorage('modal');
-  const { visible, edit, del, postId } = useSelector((state: RootState) => state.modal);
+  const { postId, edit, del, visible } = useSelector((state: RootState) => state.modal);
   const { mutate } = usePostMutate();
 
   function handleDeletePost() {
-    const postBeingDeleted = postId;
-    mutate({ postId: postBeingDeleted, method: 'DELETE', message: 'Post successfully deleted' });
+    mutate({ postId, method: 'DELETE', message: 'Post successfully deleted' });
     dispatch(closeModal({ postId: undefined }));
   }
 
@@ -30,16 +27,16 @@ export default function Modal() {
     dispatch(closeModal({}));
   }
 
-  if (!modalStorage?.visible || !visible) {
+  if (!visible) {
     return null;
   }
 
   return ReactDOM.createPortal(
     <Overlay>
       <ContentModal>
-        {(modalStorage?.edit || edit) && <FormGroup edit cancel onSubmit={handleEditPost} />}
+        {(edit) && <FormGroup edit cancel onSubmit={handleEditPost} />}
 
-        {(modalStorage?.del || del) && (
+        {(del) && (
           <ContainerDelete>
             <h1>Are you sure you want to delete this item?</h1>
 
