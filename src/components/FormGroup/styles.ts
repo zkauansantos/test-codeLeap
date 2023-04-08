@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
 export const Form = styled.form`
+  h1 {
+      font-size: ${({ theme }) => theme.fontsSizes.xl};
+    }
+
   label {
     margin-top: 24px;
     display: flex;

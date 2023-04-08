@@ -10,7 +10,7 @@ export const Spinner = styled.div`
   border: 5px solid ${({ theme }) => theme.colors.semiLight};
   border-top: 5px solid ${({ theme }) => theme.colors.lightBlue};
   border-radius: 50%;
-  margin: 4rem 0;
+  margin: 6rem auto;
   width: 5rem;
   height: 5rem;
   animation: ${spinAnimation} 1s linear infinite;

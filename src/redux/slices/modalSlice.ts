@@ -6,7 +6,7 @@ export const slice = createSlice({
     visible: false,
     edit: false,
     del: false,
-    postId: null,
+    postId: undefined,
   },
   reducers: {
     openModal(state, { payload }) {

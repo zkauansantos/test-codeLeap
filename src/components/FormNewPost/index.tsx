@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 
+import { toast } from 'react-toastify';
 import { SubmitParameters } from '../../types/submit';
 import { RootState } from '../../types/interfaces/RootState';
 
@@ -21,6 +22,7 @@ export default function FormNewPost() {
     };
 
     mutate({ body, method: 'POST' });
+    toast.success('Post created successfully');
   }
 
   return (

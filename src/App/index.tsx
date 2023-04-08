@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import { GlobalStyles } from '../assets/styles/GlobalStyles';
 import { theme } from '../assets/styles/theme';
 import { client } from '../lib/queryClient';
-import { Container } from './styles';
+import { Container, StyledToastContainer } from './styles';
+import 'react-toastify/dist/ReactToastify.css';
 
 import store from '../redux/store/store';
 
@@ -19,6 +20,7 @@ export default function App() {
         <QueryClientProvider client={client}>
           <Container>
             <Provider store={store}>
+              <StyledToastContainer position="bottom-center" />
               <Routes />
             </Provider>
           </Container>

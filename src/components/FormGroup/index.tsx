@@ -27,6 +27,8 @@ export default function FormGroup({ cancel, edit, onSubmit }: FormGroupProps) {
 
   return (
     <Form onSubmit={handleSubmit}>
+      {edit && <h1>Edit item</h1>}
+
       <label htmlFor="title">
         Title
         <input

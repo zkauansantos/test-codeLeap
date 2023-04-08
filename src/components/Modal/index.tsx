@@ -12,13 +12,9 @@ export default function Modal() {
   const { visible, edit, del, postId } = useSelector((state: RootState) => state.modal);
   const { mutate } = usePostMutate();
 
-  if (!visible) {
-    return null;
-  }
-
   function handleDeletePost() {
     const postBeingDeleted = postId;
-    mutate({ postId: postBeingDeleted, method: 'DELETE' });
+    mutate({ postId: postBeingDeleted, method: 'DELETE', message: 'Post successfully deleted' });
     dispatch(closeModal({ postId: undefined }));
   }
 
@@ -28,8 +24,12 @@ export default function Modal() {
       content,
     };
 
-    mutate({ body, method: 'PATCH', postId: `${postId}/` });
+    mutate({ body, method: 'PATCH', postId, message: 'Post successfully edited' });
     dispatch(closeModal({}));
+  }
+
+  if (!visible) {
+    return null;
   }
 
   return ReactDOM.createPortal(
@@ -42,7 +42,7 @@ export default function Modal() {
             <h1>Are you sure you want to delete this item?</h1>
 
             <div>
-              <Button label="Cancel" onAction={() => dispatch(closeModal({ postId: undefined }))} background="#FFF" />
+              <Button label="Cancel" onAction={() => dispatch(closeModal({}))} background="#FFF" />
               <Button label="Delete" background="#FF5151" onAction={handleDeletePost} />
             </div>
           </ContainerDelete>
