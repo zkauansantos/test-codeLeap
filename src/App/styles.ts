@@ -11,10 +11,9 @@ export const Container = styled.div`
 `;
 
 export const StyledToastContainer = styled(ToastContainer)`
-  .Toastify__toast-container {
-  }
-
   .Toastify__toast {
+    max-width: 80%;
+    margin: 0 auto;
     background-color:  ${({ theme }) => theme.colors.light};
 
   }
@@ -24,5 +23,6 @@ export const StyledToastContainer = styled(ToastContainer)`
   }
   .Toastify__progress-bar {
     background: ${({ theme }) => theme.colors.lightBlue};
+
   }
 `;

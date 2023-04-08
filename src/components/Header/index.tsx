@@ -28,7 +28,7 @@ export default function Header({
   }
 
   return (
-    <ContainerHeader height={height}>
+    <ContainerHeader height={height} actions={userActions}>
       <h1>{title}</h1>
 
       {userActions && (

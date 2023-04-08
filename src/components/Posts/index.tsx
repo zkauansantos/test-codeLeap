@@ -57,7 +57,6 @@ export default function Posts() {
   return (
     <Container>
       <InfiniteScroll
-        style={{ width: '100%' }}
         dataLength={posts.length}
         hasMore={hasNextPage || isLoading}
         next={() => next()}

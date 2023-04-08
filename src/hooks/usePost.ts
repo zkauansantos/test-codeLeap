@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { Iposts } from '../types/interfaces/Post';
 
 export default function usePost() {
-  async function loadPosts(pageParam: any = 0): Promise<Iposts> {
+  async function loadPosts(pageParam: number = 0): Promise<Iposts> {
     const response = await fetch(`https://dev.codeleap.co.uk/careers/?limit=10&offset=${pageParam}`);
     const json = await response.json();
     return json;

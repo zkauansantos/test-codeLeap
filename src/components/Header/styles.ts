@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const ContainerHeader = styled.header<{ height: string }>`
+export const ContainerHeader = styled.header<{ height: string, actions: boolean | undefined }>`
   width: 100%;
   background: ${({ theme }) => theme.colors.lightBlue};
   height: 8rem;
@@ -20,7 +20,9 @@ export const ContainerHeader = styled.header<{ height: string }>`
   }
 
   @media screen and (max-width: 340px) {
-    padding: 2em ;
-    flex-direction: column;
+    ${({ actions }) => actions && css`
+      padding: 2em ;
+      flex-direction: column;
+    `}
   }
 `;

@@ -12,6 +12,13 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 62.5%;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    min-height: 100vh;
+
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      select:focus,
+      textarea:focus,
+      input:focus {
+        font-size: ${({ theme }) => theme.fontsSizes.sm};
+      }
+    }
   }
 `;
