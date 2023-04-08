@@ -14,10 +14,14 @@ export const Overlay = styled.div`
 
 export const ContentModal = styled.div`
   background: ${({ theme }) => theme.colors.light};
-  height: fit-content;
-  min-width: 66rem;
+  width: 80%;
+  max-width: 66rem;
   padding: 24px;
   border-radius: 8px;
+
+  @media screen and (max-width: 525px){
+    width: 95%;
+  }
 `;
 
 export const ContainerDelete = styled.div`

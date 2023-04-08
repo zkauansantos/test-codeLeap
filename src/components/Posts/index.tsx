@@ -61,7 +61,7 @@ export default function Posts() {
         dataLength={posts.length}
         hasMore={hasNextPage || isLoading}
         next={() => next()}
-        loader={false}
+        loader={<Spinner />}
         scrollableTarget={false}
       >
 
@@ -69,7 +69,6 @@ export default function Posts() {
           <Post key={post.id} post={post} name={name} />
         ))}
       </InfiniteScroll>
-      {isLoading && <Spinner />}
     </Container>
   );
 }

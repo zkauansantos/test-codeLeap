@@ -7,11 +7,20 @@ export const ContainerHeader = styled.header<{ height: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 38px;
+  padding: 0 3.8rem;
   margin-bottom: 24px;
 
   h1 {
     font-size: ${({ theme }) => theme.fontsSizes.lg};
     color: ${({ theme }) => theme.colors.light};
+  }
+
+  @media screen and (max-width: 425px) {
+    padding: 0 2rem;
+  }
+
+  @media screen and (max-width: 340px) {
+    padding: 2em ;
+    flex-direction: column;
   }
 `;
