@@ -2,17 +2,27 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { Iposts } from '../types/interfaces/Post';
 
 export default function usePost() {
-  async function loadPosts(): Promise<Iposts> {
-    const response = await fetch('https://dev.codeleap.co.uk/careers/?limit=10&offset=0');
+  async function loadPosts(pageParam: any = 0): Promise<Iposts> {
+    const response = await fetch(`https://dev.codeleap.co.uk/careers/?limit=10&offset=${pageParam}`);
     const json = await response.json();
     return json;
   }
 
-  const query = useInfiniteQuery({
-    queryFn: loadPosts,
+  return useInfiniteQuery({
+    queryFn: ({ pageParam }) => loadPosts(pageParam),
     queryKey: ['posts-data'],
     retry: false,
-  });
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.next) return undefined;
+      const regex = /offset=(\d+)/;
+      const match = lastPage.next.match(regex);
 
-  return query;
+      if (match) {
+        return parseInt(match[1], 10);
+      }
+
+      return undefined;
+    },
+    refetchOnMount: true,
+  });
 }

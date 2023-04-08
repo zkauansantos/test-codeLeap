@@ -6,6 +6,10 @@ export const PostStyled = styled.div`
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray};
   margin-top: 24px;
+
+  header {
+    border-radius: 8px 8px 0px 0px;
+  }
 `;
 
 export const Content = styled.div`
