@@ -8,6 +8,7 @@ import { RootState } from '../../types/interfaces/RootState';
 import UserActions from '../UserActions';
 
 import { ContainerHeader } from './styles';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 interface HeaderProps {
   title: string,
@@ -19,10 +20,10 @@ interface HeaderProps {
 export default function Header({
   title, height, userActions, children,
 }: HeaderProps) {
-  const { name } = useSelector(({ user }: RootState) => user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const userP: any = useLocalStorage('user');
+  const { name } = useSelector(({ user }: RootState) => user);
   function handleLogout() {
     dispatch(logout());
     navigate('/', { replace: true });
@@ -34,7 +35,7 @@ export default function Header({
 
       {userActions && (
         <UserActions>
-          <span>{name}</span>
+          <span>{userP?.name ?? name}</span>
           <BiLogOut onClick={() => handleLogout()} />
         </UserActions>
       )}
