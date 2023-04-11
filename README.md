@@ -14,7 +14,7 @@ This example is designed for the web, but if you choose to build it with React-N
 You do not have to create users in the backend. Just keep the username string somewhere in the frontend so we can submit it when creating a post later on.
 <br/>
 <br/>
-[<img src="./src/assets/layout/signup.svg" width="900"/>]()
+[<img src="./src/assets/layout/signup.svg" width="900"/>]
 
 - Main Screen : This page contains several different features:
   - Ability to create posts
@@ -25,17 +25,17 @@ You do not have to create users in the backend. Just keep the username string so
   - Sort the list by the most recent on top.
 <br/>
 <br/>
-  [<img src="./src/assets/layout/mainscreen.svg" width="900"/>]()
+  [<img src="./src/assets/layout/mainscreen.svg" width="900"/>]
 
 - Delete Alert: When deleting an item, show a modal to confirm.
 <br/>
 <br/>
-  [<img src="./src/assets/layout/deletealert.svg" width="900"/>]()
+  [<img src="./src/assets/layout/deletealert.svg" width="900"/>]
 
 - Edit item modal: Self explanatory, make a modal to edit the existing items in the list.
 <br/>
 <br/>
-  [<img src="./src/assets/layout/editmodal.svg" width="900"/>]()
+  [<img src="./src/assets/layout/editmodal.svg" width="900"/>]
 
 
 # Technologies used
